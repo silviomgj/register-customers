@@ -10,6 +10,10 @@ const Customer = sequelize.define("clientes", {
         type: Sequelize.STRING,
         allowNull: false
     },
+    sobrenome: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     data_nasc: {
         type: Sequelize.STRING,
         allowNull: false
