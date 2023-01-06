@@ -1,5 +1,5 @@
-const { Sequelize, Model, DataTypes } = require("sequelize");
-const sequelize = new Sequelize('cadastro-cliente', 'root', '0309', { dialect: 'mysql', host: 'localhost', dialectOptions: {} });
+const { Sequelize } = require("sequelize");
+const sequelize = require("../database");
 
 const Customer = sequelize.define("clientes", {
     id: {
