@@ -17,5 +17,15 @@ module.exports = {
         const customer = await Customer.findByPk(req.params.id)
               
         res.send(customer)
+    },
+    async store(req, res, next) {
+         const customer = await Customer.create({
+             nome: req.body.nome,
+             sobrenome: req.body.sobrenome,
+             conjuge: req.body.conjuge,
+             data_nasc: req.body.data_nasc
+         })
+
+         res.send(customer)
     }
 }
