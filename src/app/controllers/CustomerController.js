@@ -13,10 +13,9 @@ module.exports = {
     
         res.send(dto)
     },
-    async index(req, res, next) {
-        const customers = await Customer.findAll()
-        const byId = customer => customer.id == req.params.id
-       
-        res.send(customers.find(byId))
+    async index(req, res, next) { 
+        const customer = await Customer.findByPk(req.params.id)
+              
+        res.send(customer)
     }
 }
