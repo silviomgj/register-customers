@@ -27,5 +27,10 @@ module.exports = {
          })
 
          res.send(customer)
+    },
+    async delete(req, res, next) {
+        await Customer.destroy({ where: { id: req.params.id }});
+
+        res.status(204).send()
     }
 }
