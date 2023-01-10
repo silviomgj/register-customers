@@ -1,5 +1,7 @@
 const Customer = require('../models/Customer.js')
 
+const SEQUELIZE_DELETED_SUCCESSFUL = 1;
+
 module.exports = {
     async show(req, res, next) {
         const customers = await Customer.findAll()
@@ -29,8 +31,17 @@ module.exports = {
          res.send(customer)
     },
     async delete(req, res, next) {
-        await Customer.destroy({ where: { id: req.params.id }});
+        const customerId = req.params.id
+        const isDeleted = await Customer.destroy({ where: { id: customerId }});
 
-        res.status(204).send()
+       if (isDeleted == SEQUELIZE_DELETED_SUCCESSFUL) {
+            res.status(204).send()
+        }
+
+        res.status(404).send({
+            type: 'NOT_FOUND',
+            title: 'Resource not found',
+            detail: `Customer ${customerId} not found`
+        })
     }
 }
