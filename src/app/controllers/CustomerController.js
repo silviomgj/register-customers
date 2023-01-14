@@ -43,5 +43,18 @@ module.exports = {
             title: 'Resource not found',
             detail: `Customer ${customerId} not found`
         })
+    },
+    async update(req, res, next) {
+        const customer = await Customer.findByPk(req.body.id)
+
+        customer.set({
+            nome: req.body.nome,
+            sobrenome: req.body.sobrenome,
+            data_nasc: req.body.data_nasc,
+            conjuge: req.body.conjuge
+          });
+        const updatedCustomer = await customer.save();
+
+        res.send(updatedCustomer)
     }
 }
