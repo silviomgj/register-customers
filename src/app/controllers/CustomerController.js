@@ -9,7 +9,7 @@ module.exports = {
         const dto = customers.map((customer) => {
             return {
                 id: customer.id,
-                nomeCompleto: `${customer.nome} ${customer.sobrenome}`
+                fullName: `${customer.firstName} ${customer.familyName}`
             }
         })
     
@@ -22,10 +22,11 @@ module.exports = {
     },
     async store(req, res, next) {
          const customer = await Customer.create({
-             nome: req.body.nome,
-             sobrenome: req.body.sobrenome,
-             conjuge: req.body.conjuge,
-             data_nasc: req.body.data_nasc
+             firstName: req.body.firstName,
+             familyName: req.body.familyName,
+             spouse: req.body.spouse,
+             birthDate: req.body.birthDate
+
          })
 
          res.send(customer)
@@ -48,10 +49,10 @@ module.exports = {
         const customer = await Customer.findByPk(req.body.id)
 
         customer.set({
-            nome: req.body.nome,
-            sobrenome: req.body.sobrenome,
-            data_nasc: req.body.data_nasc,
-            conjuge: req.body.conjuge
+            firstName: req.body.firstName,
+            familyName: req.body.familyName,
+            spouse: req.body.spouse,
+            birthDate: req.body.birthDate
           });
         const updatedCustomer = await customer.save();
 

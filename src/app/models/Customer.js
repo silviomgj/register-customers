@@ -7,19 +7,23 @@ const Customer = sequelize.define("clientes", {
         primaryKey: true,
         autoIncrement: true
     },
-    nome: {
+    firstName: {
+        field: 'nome',
         type: Sequelize.STRING,
         allowNull: false
     },
-    sobrenome: {
+    familyName: {
+        field: 'sobrenome',
         type: Sequelize.STRING,
         allowNull: false
     },
-    data_nasc: {
+    birthDate: {
+        field: 'data_nasc',
         type: Sequelize.STRING,
         allowNull: false
     },
-    conjuge: {
+    spouse: {
+        field: 'conjuge',
         type: Sequelize.STRING,
         allowNull: false 
     }
