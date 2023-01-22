@@ -1,6 +1,7 @@
 const { Router } = require("express");
 
 const CustomerController = require('./app/controllers/CustomerController');
+const AddressController = require('./app/controllers/AddressController')
 
 const routes = new Router();
 
@@ -9,5 +10,6 @@ routes.get('/customers/:id', CustomerController.index);
 routes.post('/customers', CustomerController.store);
 routes.delete('/customers/:id', CustomerController.delete);
 routes.put('/customers', CustomerController.update);
+routes.get('/addresses', AddressController.show);
 
 module.exports = routes;
