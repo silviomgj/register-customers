@@ -10,6 +10,8 @@ routes.get('/customers/:id', CustomerController.index);
 routes.post('/customers', CustomerController.store);
 routes.delete('/customers/:id', CustomerController.delete);
 routes.put('/customers', CustomerController.update);
+
 routes.get('/addresses', AddressController.show);
+routes.post('/addresses', AddressController.store);
 
 module.exports = routes;

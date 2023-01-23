@@ -7,12 +7,12 @@ const Address = sequelize.define("enderecos", {
         primaryKey: true,
         autoIncrement: true
     },
-    publicPlace: {
+    streetAddress: {
         field: 'logradouro',
         type: Sequelize.STRING,
         allowNull: false
     },
-    number: {
+    streetAddressNumber: {
         field: 'numero',
         type: Sequelize.STRING,
         allowNull: false

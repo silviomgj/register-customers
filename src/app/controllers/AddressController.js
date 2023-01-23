@@ -12,5 +12,17 @@ module.exports = {
         })
 
         res.send(dto)
+    },
+    async store(req, res, next) {
+        const address = await Address.create({
+            streetAddress: req.body.streetAddress,
+            streetAddressNumber: req.body.streetAddressNumber,
+            district: req.body.district,
+            city: req.body.city,
+            state: req.body.state,
+            zipCode: req.body.zipCode
+        })
+
+        res.send(address)
     }
-}
+}   
