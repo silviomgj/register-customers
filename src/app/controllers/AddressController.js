@@ -24,5 +24,10 @@ module.exports = {
         })
 
         res.send(address)
+    },
+    async index(req, res, next) {
+        const address = await Address.findByPk(req.params.id)
+
+        res.send(address)
     }
-}   
+}
