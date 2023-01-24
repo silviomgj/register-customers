@@ -14,5 +14,6 @@ routes.put('/customers', CustomerController.update);
 routes.get('/addresses', AddressController.show);
 routes.post('/addresses', AddressController.store);
 routes.get('/addresses/:id', AddressController.index);
+routes.put('/addresses', AddressController.update);
 
 module.exports = routes;
