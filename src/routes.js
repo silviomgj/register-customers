@@ -1,7 +1,8 @@
 const { Router } = require("express");
 
 const CustomerController = require('./app/controllers/CustomerController');
-const AddressController = require('./app/controllers/AddressController')
+const AddressController = require('./app/controllers/AddressController');
+const DocumentsController = require('./app/controllers/DocumentsController')
 
 const routes = new Router();
 
@@ -16,5 +17,7 @@ routes.get('/addresses/:id', AddressController.index);
 routes.post('/addresses', AddressController.store);
 routes.delete('/addresses/:id', AddressController.delete);
 routes.put('/addresses', AddressController.update);
+
+routes.get('/documents', DocumentsController.show);
 
 module.exports = routes;
