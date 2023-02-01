@@ -1,16 +1,7 @@
 const { Router } = require("express");
 const multer = require('multer');
-const { v4: uuidv4} = require('uuid');
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'temp/uploads/')
-    },
-    filename: function (req, file, cb) {
-        const prefix = uuidv4()
-        cb(null, `${prefix}_${file.originalname}`)
-    }
-})
-const upload = multer({dest: 'temp/uploads/', storage: storage});
+const multerConfig = require('./config/multer')
+const upload = multer(multerConfig);
 
 const CustomerController = require('./app/controllers/CustomerController');
 const AddressController = require('./app/controllers/AddressController');
