@@ -7,6 +7,8 @@
 node_modules/
 dist/
 .env
+temp/uploads/*
+!/temp/uploads/.gitkeep
 
 # Compiled Java class files
 *.class

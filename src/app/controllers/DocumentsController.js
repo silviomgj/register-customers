@@ -12,5 +12,14 @@ module.exports = {
         })
 
         res.send(dto)
+    },
+    async store(req, res, next) {
+        const document = await Documents.create({
+            identityDocument: req.body.identityDocument,
+            socialSecurity: req.body.socialSecurity,
+            photo: `${req.file.destination}${req.file.filename}`
+        })
+
+        res.send(document)
     }
 }

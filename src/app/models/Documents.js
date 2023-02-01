@@ -7,7 +7,7 @@ const Documents = sequelize.define("documentos", {
         primaryKey: true,
         autoIncrement: true
     },
-    indentificationDocument: {
+    identityDocument: {
         field: 'rg',
         type: Sequelize.STRING,
         allowNull: false
@@ -19,7 +19,7 @@ const Documents = sequelize.define("documentos", {
     },
     photo: {
         field: 'foto',
-        type: Sequelize.BLOB("long"),
+        type: Sequelize.STRING,
         allowNull: false
     }
 }, {timestamps: false} );
