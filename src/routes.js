@@ -24,5 +24,6 @@ routes.put('/addresses', AddressController.update);
 routes.get('/documents', DocumentsController.show);
 routes.get('/documents/:id', DocumentsController.index);
 routes.post('/documents', upload.single('photo'), DocumentsController.store);
+routes.delete('/documents/:id', DocumentsController.delete);
 
 module.exports = routes;
