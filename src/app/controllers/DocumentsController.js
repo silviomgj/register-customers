@@ -19,7 +19,7 @@ module.exports = {
         const document = await Documents.create({
             identityDocument: req.body.identityDocument,
             socialSecurity: req.body.socialSecurity,
-            photo: `${req.file.destination}${req.file.filename}`
+            photo: `/${req.file.destination}${req.file.filename}`
         })
 
         res.send(document)
