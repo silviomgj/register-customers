@@ -42,5 +42,17 @@ module.exports = {
             title: 'Resource not found',
             detail: `Address ${documentId} not found`
         })
+    },
+    async update(req, res ,next) {
+        const document = await Documents.findByPk(req.body.id)
+
+        document.set({
+            identityDocument: req.body.identityDocument,
+            socialSecurity: req.body.socialSecurity,
+            photo: req.body.photo,
+        })
+        const updatedDocument = await document.save()
+
+        res.send(updatedDocument)
     }
 }
