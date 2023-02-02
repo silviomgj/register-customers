@@ -14,10 +14,10 @@ module.exports = {
         }
     }),
     fileFilter: function (req, file, callback) {
-        const ext = path.extname(file.originalname);
-        if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
+        const allowedMimeTypes = ['image/jpg', 'image/png', 'image/jpeg']
+        if (!allowedMimeTypes.includes(file.mimetype))
             return callback(new Error('Only images are allowed'))
-        }
+
         callback(null, true)
     }
 }
