@@ -21,5 +21,10 @@ module.exports = {
         })
 
         res.send(document)
+    },
+    async index(req, res, next) { 
+        const document = await Documents.findByPk(req.params.id)
+
+        res.send(document)
     }
 }
