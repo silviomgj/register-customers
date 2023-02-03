@@ -1,6 +1,6 @@
-const Documents = require ('../models/Documents')
-
-const SEQUELIZE_DELETED_SUCCESSFUL = 1;
+const Documents = require ('../models/Documents');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
     async show(req, res, next) {
@@ -30,17 +30,19 @@ module.exports = {
         res.send(document)
     },
     async delete(req, res, next) {
-        const documentId = req.params.id
-        const deleted = await Documents.destroy({ where: { id: documentId }});
-
-       if (deleted == SEQUELIZE_DELETED_SUCCESSFUL) {
-            res.status(204).send()
+        const document = await Documents.findByPk(req.params.id)
+        if (!document) {
+            res.status(404).send({
+                type: 'NOT_FOUND',
+                title: 'Resource not found',
+                detail: `Document ${req.params.id} not found`
+            })
         }
 
-        res.status(404).send({
-            type: 'NOT_FOUND',
-            title: 'Resource not found',
-            detail: `Address ${documentId} not found`
-        })
+        const filePath = document.photo
+        fs.unlinkSync(path.join(__dirname, "..", "..", "..", filePath))
+        await document.destroy()
+
+        res.status(204).send()
     }
 }
