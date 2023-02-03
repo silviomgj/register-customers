@@ -1,4 +1,5 @@
-const Address = require('../models/Address')
+const Address = require('../models/Address');
+const AddressNotFound = require('../errors/AddressNotFound');
 
 const SEQUELIZE_DELETED_SUCCESSFUL = 1;
 
@@ -55,10 +56,6 @@ module.exports = {
             res.status(204).send()
         }
 
-        res.status(404).send({
-            type: 'NOT_FOUND',
-            title: 'Resource not found',
-            detail: `Address ${addressId} not found`
-        })
+        throw new AddressNotFound(addressId);
     }
 }

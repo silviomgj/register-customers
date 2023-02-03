@@ -1,4 +1,5 @@
-const Customer = require('../models/Customer.js')
+const Customer = require('../models/Customer.js');
+const CustomerNotFound = require('../errors/CustomerNotFound')
 
 const SEQUELIZE_DELETED_SUCCESSFUL = 1;
 
@@ -39,11 +40,7 @@ module.exports = {
             res.status(204).send()
         }
 
-        res.status(404).send({
-            type: 'NOT_FOUND',
-            title: 'Resource not found',
-            detail: `Customer ${customerId} not found`
-        })
+        throw new CustomerNotFound(customerId);
     },
     async update(req, res, next) {
         const customer = await Customer.findByPk(req.body.id)

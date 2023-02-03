@@ -1,6 +1,7 @@
 const Documents = require ('../models/Documents');
 const fs = require('fs');
 const path = require('path');
+const DocumentNotFound = require('../errors/DocumentNotFound');
 
 module.exports = {
     async show(req, res, next) {
@@ -30,13 +31,10 @@ module.exports = {
         res.send(document)
     },
     async delete(req, res, next) {
-        const document = await Documents.findByPk(req.params.id)
+        const documentId = req.params.id
+        const document = await Documents.findByPk(documentId)
         if (!document) {
-            res.status(404).send({
-                type: 'NOT_FOUND',
-                title: 'Resource not found',
-                detail: `Document ${req.params.id} not found`
-            })
+            throw new DocumentNotFound(documentId);
         }
 
         const filePath = document.photo
