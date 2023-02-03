@@ -1,8 +1,6 @@
 const Address = require('../models/Address');
 const AddressNotFound = require('../errors/AddressNotFound');
 
-const SEQUELIZE_DELETED_SUCCESSFUL = 1;
-
 module.exports = {
     async show(req, res, next) {
         const addresses = await Address.findAll()
@@ -52,7 +50,7 @@ module.exports = {
         const addressId = req.params.id
         const deleted = await Address.destroy({ where: { id: addressId }});
 
-       if (deleted == SEQUELIZE_DELETED_SUCCESSFUL) {
+        if (deleted) {
             res.status(204).send()
         }
 

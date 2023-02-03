@@ -1,8 +1,6 @@
 const Customer = require('../models/Customer.js');
 const CustomerNotFound = require('../errors/CustomerNotFound')
 
-const SEQUELIZE_DELETED_SUCCESSFUL = 1;
-
 module.exports = {
     async show(req, res, next) {
         const customers = await Customer.findAll()
@@ -36,7 +34,7 @@ module.exports = {
         const customerId = req.params.id
         const isDeleted = await Customer.destroy({ where: { id: customerId }});
 
-       if (isDeleted == SEQUELIZE_DELETED_SUCCESSFUL) {
+        if (isDeleted) {
             res.status(204).send()
         }
 
