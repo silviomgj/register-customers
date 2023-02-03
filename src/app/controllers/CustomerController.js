@@ -34,11 +34,11 @@ module.exports = {
         const customerId = req.params.id
         const isDeleted = await Customer.destroy({ where: { id: customerId }});
 
-        if (isDeleted) {
-            res.status(204).send()
+        if (!isDeleted) {
+            throw new CustomerNotFound(customerId);
         }
 
-        throw new CustomerNotFound(customerId);
+        res.status(204).send()
     },
     async update(req, res, next) {
         const customer = await Customer.findByPk(req.body.id)

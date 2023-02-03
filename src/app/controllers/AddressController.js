@@ -50,10 +50,10 @@ module.exports = {
         const addressId = req.params.id
         const deleted = await Address.destroy({ where: { id: addressId }});
 
-        if (deleted) {
-            res.status(204).send()
+        if (!deleted) {
+            throw new AddressNotFound(addressId);
         }
 
-        throw new AddressNotFound(addressId);
+        res.status(204).send()
     }
 }
