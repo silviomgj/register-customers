@@ -20,15 +20,14 @@ module.exports = {
         res.send(customer)
     },
     async store(req, res, next) {
-         const customer = await Customer.create({
-             firstName: req.body.firstName,
-             familyName: req.body.familyName,
-             spouse: req.body.spouse,
-             birthDate: req.body.birthDate
+        const customer = await Customer.create({
+            firstName: req.body.firstName,
+            familyName: req.body.familyName,
+            spouse: req.body.spouse,
+            birthDate: req.body.birthDate
+        })
 
-         })
-
-         res.send(customer)
+        res.send(customer)
     },
     async delete(req, res, next) {
         const customerId = req.params.id
@@ -48,7 +47,7 @@ module.exports = {
             familyName: req.body.familyName,
             spouse: req.body.spouse,
             birthDate: req.body.birthDate
-          });
+        });
         const updatedCustomer = await customer.save();
 
         res.send(updatedCustomer)
