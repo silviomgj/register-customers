@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 const sequelize = require("../database");
 
-const Documents = sequelize.define("documentos", {
+const Document = sequelize.define("documentos", {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -21,7 +21,13 @@ const Documents = sequelize.define("documentos", {
         field: 'foto',
         type: Sequelize.STRING,
         allowNull: false
+    },
+    customerId: {
+        field: 'cliente_id',
+        type: Sequelize.INTEGER,
+        references: { model: 'clientes', key: 'id' },
+        allowNull: false
     }
 }, {timestamps: false} );
 
-module.exports = Documents;
+module.exports = Document;
