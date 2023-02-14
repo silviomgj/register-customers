@@ -36,7 +36,13 @@ const Address = sequelize.define("enderecos", {
         field: 'cep',
         type: Sequelize.STRING,
         allowNull: false
-    }    
+    },
+    customerId: {
+        field: 'cliente_id',
+        type: Sequelize.INTEGER,
+        references: { model: 'clientes', key: 'id' },
+        allowNull: false
+    }
 }, {timestamps: false});
 
 module.exports = Address;

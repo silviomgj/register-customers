@@ -4,7 +4,7 @@ const multerConfig = require('./config/multer')
 const upload = multer(multerConfig);
 
 const CustomerController = require('./app/controllers/CustomerController');
-const AddressController = require('./app/controllers/AddressController');
+const CustomerAddressController = require('./app/controllers/CustomerAddressController');
 const CustomerDocumentsController = require('./app/controllers/CustomerDocumentsController');
 
 const routes = new Router();
@@ -18,11 +18,10 @@ routes.get('/customers/:id/documents', CustomerDocumentsController.show);
 routes.post('/customers/:id/documents', upload.single('photo'), CustomerDocumentsController.store);
 routes.get('/customers/:customerId/documents/:documentId', CustomerDocumentsController.index);
 routes.delete('/customers/:customerId/documents/:documentId', CustomerDocumentsController.delete);
-
-routes.get('/addresses', AddressController.show);
-routes.get('/addresses/:id', AddressController.index);
-routes.post('/addresses', AddressController.store);
-routes.delete('/addresses/:id', AddressController.delete);
-routes.put('/addresses', AddressController.update);
+routes.get('/customers/:id/addresses', CustomerAddressController.show);
+routes.post('/customers/:id/addresses', CustomerAddressController.store);
+routes.get('/customers/:customerId/addresses/:addressId', CustomerAddressController.index);
+routes.delete('/customers/:customerId/addresses/:addressId', CustomerAddressController.delete);
+routes.put('/customers/:customerId/addresses/:addressId', CustomerAddressController.update);
 
 module.exports = routes;
