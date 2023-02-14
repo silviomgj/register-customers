@@ -2,6 +2,7 @@ const Document = require ('../models/Document');
 const fs = require('fs');
 const path = require('path');
 const DocumentNotFound = require('../errors/DocumentNotFound');
+const CustomerDocumentsDTO = require('../dtos/CustomerDocumentsDTO');
 
 module.exports = {
     async show(req, res, next) {
@@ -12,12 +13,7 @@ module.exports = {
         })
 
         const dto = await documents.map((document) =>{
-            return {
-                id: document.id,
-                socialSecurity: document.socialSecurity,
-                identityDocument: document.identityDocument,
-                photo: document.photo
-            }
+           return CustomerDocumentsDTO.fromModel(document)
         })
 
         res.send(dto)
@@ -30,24 +26,12 @@ module.exports = {
             photo: `/${req.file.destination}${req.file.filename}`
         })
 
-        const dto = {
-            identityDocument: document.identityDocument,
-            socialSecurity: document.socialSecurity,
-            photo: document.photo
-        }
-
-        res.send(dto)
+        res.send(CustomerDocumentsDTO.fromModel(document))
     },
     async index(req, res, next) {
         const document = await Document.findByPk(req.params.documentId)
 
-        const dto = {
-            identityDocument: document.identityDocument,
-            socialSecurity: document.socialSecurity,
-            photo: document.photo
-        }
-
-        res.send(dto)
+        res.send(CustomerDocumentsDTO.fromModel(document))
     },
     async delete(req, res, next) {
         const documentId = req.params.documentId

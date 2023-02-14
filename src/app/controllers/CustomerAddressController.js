@@ -1,5 +1,6 @@
 const Address = require('../models/Address');
 const AddressNotFound = require('../errors/AddressNotFound');
+const CustomerAddressesDTO = require('../dtos/CustomerAddressesDTO');
 
 module.exports = {
     async show(req, res, next) {
@@ -10,15 +11,7 @@ module.exports = {
         })
 
         const dto = addresses.map((address) =>{
-            return {
-                id: address.id,
-                streetAddress: address.streetAddress,
-                streetAddressNumber: address.streetAddressNumber,
-                district: address.district,
-                city: address.city,
-                state: address.state,
-                zipCode: address.zipCode
-            }
+            return CustomerAddressesDTO.fromModel(address)
         })
 
         res.send(dto)
@@ -34,30 +27,12 @@ module.exports = {
             customerId: req.params.id
         })
 
-        const dto = {
-            streetAddress: address.streetAddress,
-            streetAddressNumber: address.streetAddressNumber,
-            district: address.district,
-            city: address.city,
-            state: address.state,
-            zipCode: address.zipCode,
-        }
-
-        res.send(dto)
+        res.send(CustomerAddressesDTO.fromModel(address))
     },
     async index(req, res, next) {
         const address = await Address.findByPk(req.params.addressId)
 
-        const dto = {
-            streetAddress: address.streetAddress,
-            streetAddressNumber: address.streetAddressNumber,
-            district: address.district,
-            city: address.city,
-            state: address.state,
-            zipCode: address.zipCode,
-        }
-
-        res.send(dto)
+        res.send(CustomerAddressesDTO.fromModel(address))
     },
     async update(req, res ,next) {
         const address = await Address.findByPk(req.params.addressId)
@@ -74,16 +49,7 @@ module.exports = {
 
         const updatedAddress = await address.save()
 
-        const dto = {
-            streetAddress: updatedAddress.streetAddress,
-            streetAddressNumber: updatedAddress.streetAddressNumber,
-            district: updatedAddress.district,
-            city: updatedAddress.city,
-            state: updatedAddress.state,
-            zipCode: updatedAddress.zipCode
-        }
-
-        res.send(dto)
+        res.send(CustomerAddressesDTO.fromModel(address))
     },
     async delete(req, res, next) {
         const addressId = req.params.addressId
